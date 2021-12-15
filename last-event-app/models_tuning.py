@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
+@tf.autograph.experimental.do_not_convert
 def loss_function(real, pred):
     mask = tf.math.logical_not(tf.math.equal(real, 0))
     loss_object_ = tf.keras.losses.SparseCategoricalCrossentropy(
