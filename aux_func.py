@@ -120,3 +120,19 @@ def make_padding(df, n_padded):
             month_seq_padded,
             day_seq_padded,
             output_seq_padded]
+            
+def model_training(model, train_x, train_y, val_split,
+                   batch_size=128, verbose=0):
+  
+    es = keras.callbacks.EarlyStopping(monitor="val_loss",
+                                       mode="min",
+                                       verbose=1,
+                                       patience=3)
+    
+    hist = model.fit(train_x, train_y,
+                     batch_size=batch_size,
+                     epochs=200,
+                     verbose=verbose,
+                     validation_split=val_split,
+                     callbacks=[es])
+    return hist
